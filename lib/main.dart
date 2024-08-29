@@ -6,7 +6,7 @@ void main() {
   runApp(MyApp());
 }
 
-///main page..
+///main page.
 
 class MyApp extends StatelessWidget{
   @override
