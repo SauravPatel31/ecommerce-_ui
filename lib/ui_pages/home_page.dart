@@ -27,13 +27,11 @@ class _HomePageState extends State<HomePage> {
                 backgroundColor: GrayClr(),
                 child: Image.asset("assets/icons/dotted-line.png",width: 35,)),
           ),
-
           actions: [
             Container(
                 margin: EdgeInsets.only(right: 10),
                 child: CircleBtn(myicon: Icons.notifications_outlined,mycolor: GrayClr(),))
           ],
-
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -109,7 +107,6 @@ class _HomePageState extends State<HomePage> {
                     scrollDirection: Axis.horizontal,
                   ),
                 ),
-
                 ///Text Special For you and See all...
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -121,7 +118,6 @@ class _HomePageState extends State<HomePage> {
                 SizedBox(height: 10,),
                 ///Special For You GridView...
                 Container(
-
                   width: double.infinity,
                   height: 600,
                   child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 15,crossAxisSpacing: 15,mainAxisExtent: 200),
