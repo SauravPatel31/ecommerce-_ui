@@ -7,7 +7,7 @@ void main() {
 }
 
 ///main page..
-///main pagess..
+
 class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
