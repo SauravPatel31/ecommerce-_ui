@@ -1,5 +1,4 @@
-import 'package:ecommerce_app/ui_pages/home_page.dart';
-import 'package:ecommerce_app/ui_pages/my_cart_page.dart';
+
 import 'package:ecommerce_app/utils/app_const_data_page.dart';
 import 'package:ecommerce_app/utils/custom_widget_page.dart';
 import 'package:ecommerce_app/utils/styling_page.dart';

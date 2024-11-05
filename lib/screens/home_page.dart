@@ -1,5 +1,4 @@
-import 'package:ecommerce_app/ui_pages/add_to_cart_page.dart';
-import 'package:ecommerce_app/ui_pages/my_cart_page.dart';
+import 'package:ecommerce_app/screens/add_to_cart_page.dart';
 import 'package:ecommerce_app/utils/app_const_data_page.dart';
 import 'package:ecommerce_app/utils/custom_widget_page.dart';
 import 'package:ecommerce_app/utils/styling_page.dart';
@@ -117,30 +116,28 @@ class _HomePageState extends State<HomePage> {
                 ),
                 SizedBox(height: 10,),
                 ///Special For You GridView...
-                Container(
-                  width: double.infinity,
-                  height: 600,
-                  child: GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 15,crossAxisSpacing: 15,mainAxisExtent: 200),
-                      itemBuilder: (_,index){
-                        return InkWell(
-                          onTap: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>AddToCartPage(sindex: index)));
-                          },
-                          child: Hero(
-                            tag: "$index",
-                            child: ProductInfo(
-                              product_img: AppConstData.productdata[index]["pimg"],
-                              product_name: AppConstData.productdata[index]["pname"],
-                              product_price:AppConstData.productdata[index]["price"] ,
-                              //choesColors: Color(AppConstData.productdata[index]["pcolor"]),
-                            ),
-                          ),
-                        ) ;
+                GridView.builder(gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,mainAxisSpacing: 15,crossAxisSpacing: 15,mainAxisExtent: 200),
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (_,index){
+                      return InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>AddToCartPage(sindex: index)));
                         },
-                    itemCount: AppConstData.productdata.length,
+                        child: Hero(
+                          tag: "$index",
+                          child: ProductInfo(
+                            product_img: AppConstData.productdata[index]["pimg"],
+                            product_name: AppConstData.productdata[index]["pname"],
+                            product_price:AppConstData.productdata[index]["price"] ,
+                            //choesColors: Color(AppConstData.productdata[index]["pcolor"]),
+                          ),
+                        ),
+                      ) ;
+                      },
+                  itemCount: AppConstData.productdata.length,
 
-                      ),
-                )
+                    )
               ],
             ),
           ),

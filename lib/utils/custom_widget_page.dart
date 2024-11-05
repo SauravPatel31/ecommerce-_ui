@@ -3,6 +3,58 @@ import 'package:ecommerce_app/utils/app_const_data_page.dart';
 import 'package:ecommerce_app/utils/styling_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+
+class MyTextField extends StatelessWidget{
+
+  TextEditingController textEditingController = TextEditingController();
+  String hintText;
+  IconData mySuficsIcon;
+  bool isVisible;
+  TextInputType? keyBoardType;
+  VoidCallbackAction? callbackAction;
+  MyTextField({required this.textEditingController,required this.hintText,required this.mySuficsIcon,this.isVisible=true,this.callbackAction,this.keyBoardType});
+  @override
+  Widget build(BuildContext context) {
+   return TextField(
+     keyboardType:keyBoardType,
+     controller: textEditingController,
+     obscureText: isVisible?false:true,
+     decoration: InputDecoration(
+       hintText: hintText,
+       suffix:isVisible?Icon(mySuficsIcon): IconButton(onPressed: (){
+          isVisible?null: callbackAction;
+       }, icon: Icon(mySuficsIcon)),
+       border: OutlineInputBorder(
+         borderSide: BorderSide(
+           color: Colors.black,
+           width: 2
+         ),
+
+         borderRadius: BorderRadius.circular(20)
+       ),
+       focusedBorder: OutlineInputBorder(
+           borderSide: BorderSide(
+               color: Colors.black,
+               width: 2
+           ),
+
+           borderRadius: BorderRadius.circular(20)
+       ),
+       enabledBorder: OutlineInputBorder(
+           borderSide: BorderSide(
+               color: Colors.black,
+               width: 2
+           ),
+
+           borderRadius: BorderRadius.circular(20)
+       ),
+     ),
+   );
+  }
+
+}
 
 class CircleBtn extends StatelessWidget{
   var mycolor;
@@ -29,8 +81,6 @@ class RoundedBtn extends StatelessWidget{
   var btnheight;
   var textsize;
   var textcolor;
-
-
 
   RoundedBtn({required this.btnname,this.btncolor,this.btnwidth,this.btnheight,this.textsize,this.textcolor});
   @override

@@ -1,4 +1,4 @@
-import 'package:ecommerce_app/ui_pages/bottom_nav_page.dart';
+import 'package:ecommerce_app/screens/splash_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:BottomNavPage(),
+      home:SplashPage(),
     );
   }
 
