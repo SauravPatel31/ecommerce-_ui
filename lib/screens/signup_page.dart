@@ -15,16 +15,17 @@ class SignupPage extends StatelessWidget{
          mainAxisAlignment: MainAxisAlignment.center,
          children: [
            Text("Create your account"),
+           SizedBox(height: 11,),
            MyTextField(textEditingController: nameController, hintText: "Enter the name", mySuficsIcon: Icons.text_fields,keyBoardType: TextInputType.text,),
+           SizedBox(height: 11,),
            MyTextField(textEditingController: mobNoController, hintText: "Enter the mobile number", mySuficsIcon: Icons.call,keyBoardType: TextInputType.phone,),
+           SizedBox(height: 11,),
            MyTextField(textEditingController: emailController, hintText: "Enter the email", mySuficsIcon:Icons.email,keyBoardType: TextInputType.emailAddress,),
            SizedBox(height: 11,),
            MyTextField(textEditingController: passController, hintText: "Enter the password", mySuficsIcon:Icons.lock,isVisible: false,),
            SizedBox(height: 11,),
            InkWell(
-               onTap: (){
-                 print("Login");
-               },
+               onTap: (){},
                child: RoundedBtn(btnname: "SignUp")),
            SizedBox(height: 16,),
            Row(
