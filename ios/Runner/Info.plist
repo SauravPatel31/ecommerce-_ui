@@ -45,5 +45,11 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>user managed profiles can access Photo Library</string>
+	<key>NSCameraUsageDescription</key>
+	<string>user managed profiles can access Photo Library</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>user managed profiles can access Photo Library</string>
 </dict>
 </plist>

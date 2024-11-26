@@ -16,6 +16,16 @@ TextStyle mytext11({FontWeight myFontweight = FontWeight.normal,Color?mycolor}){
 
   );
 }
+TextStyle mytext13({FontWeight myFontweight = FontWeight.normal,Color?mycolor}){
+  return TextStyle(
+      fontSize: 13,
+      color: mycolor??BlackClr(),
+      fontWeight: myFontweight,
+      fontFamily: "pop"
+
+
+  );
+}
 
 TextStyle mytext16({FontWeight myFontweight = FontWeight.normal,Color?mycolor}){
   return TextStyle(

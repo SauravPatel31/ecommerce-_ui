@@ -1,31 +1,45 @@
-
-import 'package:ecommerce_app/utils/app_const_data_page.dart';
 import 'package:ecommerce_app/utils/styling_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-class MyTextField extends StatelessWidget{
-
+class MyTextField extends StatefulWidget{
+  String? Function(String?) validator;
   TextEditingController textEditingController = TextEditingController();
   String hintText;
   IconData mySuficsIcon;
   bool isVisible;
+  bool isPasswordField;
   TextInputType? keyBoardType;
   VoidCallbackAction? callbackAction;
-  MyTextField({required this.textEditingController,required this.hintText,required this.mySuficsIcon,this.isVisible=true,this.callbackAction,this.keyBoardType});
+  MyTextField({required this.textEditingController,required this.hintText,required this.mySuficsIcon,this.isVisible=true,this.callbackAction,this.keyBoardType,this.isPasswordField=false,required this.validator});
+
+  @override
+  State<MyTextField> createState() => _MyTextFieldState();
+}
+
+class _MyTextFieldState extends State<MyTextField> {
+
   @override
   Widget build(BuildContext context) {
-   return TextField(
-     keyboardType:keyBoardType,
-     controller: textEditingController,
-     obscureText: isVisible?false:true,
+    print("uirebuild");
+   return TextFormField(
+     validator: widget.validator,
+     keyboardType:widget.keyBoardType,
+     controller: widget.textEditingController,
+     obscureText: widget.isVisible?false:true,
      decoration: InputDecoration(
-       hintText: hintText,
-       suffix:isVisible?Icon(mySuficsIcon): IconButton(onPressed: (){
-          isVisible?null: callbackAction;
-       }, icon: Icon(mySuficsIcon)),
+       hintText: widget.hintText,
+       suffix:widget.isPasswordField? InkWell(
+           onTap: (){
+             setState(() {
+               widget.isVisible=! widget.isVisible;
+               print("ispass rebuild");
+             });
+           },
+           child: widget.isVisible?Icon(Icons.visibility):Icon(Icons.visibility_off)):Icon(widget.mySuficsIcon),
        border: OutlineInputBorder(
          borderSide: BorderSide(
            color: Colors.black,
@@ -53,7 +67,6 @@ class MyTextField extends StatelessWidget{
      ),
    );
   }
-
 }
 
 class CircleBtn extends StatelessWidget{
@@ -65,10 +78,11 @@ class CircleBtn extends StatelessWidget{
   CircleBtn({ required this.myicon,this.mycolor,this.iconcolor,this.iconsize,this.circleradius});
   @override
   Widget build(BuildContext context) {
+    bool isDark=Theme.of(context).brightness==Brightness.dark;
     return CircleAvatar(
-      maxRadius: circleradius??27,
-      backgroundColor: mycolor??WhiteClr(),
-      child: Icon(myicon,size: iconsize??30,color: iconcolor??BlackClr(),),
+      maxRadius: circleradius??25,
+      backgroundColor:mycolor?? GrayClr(),
+      child: Icon(myicon,size: iconsize??25,color: iconcolor??BlackClr(),),
     );
   }
 
@@ -81,8 +95,9 @@ class RoundedBtn extends StatelessWidget{
   var btnheight;
   var textsize;
   var textcolor;
+  Widget? mainWidget;
 
-  RoundedBtn({required this.btnname,this.btncolor,this.btnwidth,this.btnheight,this.textsize,this.textcolor});
+  RoundedBtn({required this.btnname,this.btncolor,this.btnwidth,this.btnheight,this.textsize,this.textcolor,this.mainWidget});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -92,14 +107,14 @@ class RoundedBtn extends StatelessWidget{
         color: btncolor??OrangeClr(),
           borderRadius: BorderRadius.circular(20)
       ),
-      child: Center(child: Text(btnname,style: TextStyle(fontSize:textsize??15,color: textcolor??WhiteClr(),fontWeight: FontWeight.w400 ),)),
+      child:mainWidget?? Center(child: Text(btnname,style: TextStyle(fontSize:textsize??15,color: textcolor??WhiteClr(),fontWeight: FontWeight.w400 ),)),
     );
   }
 
 }
 
 class ProductInfo extends StatelessWidget{
-  var product_img;
+  ImageProvider product_img;
   var product_name;
   var product_price;
   var choesColors;
@@ -107,9 +122,10 @@ class ProductInfo extends StatelessWidget{
   ProductInfo({required this.product_img,required this.product_name,required this.product_price,this.choesColors});
   @override
   Widget build(BuildContext context) {
+    bool isDark = Theme.of(context).brightness==Brightness.dark;
     return Container(
       decoration: BoxDecoration(
-          color: GrayClr(),
+          color:isDark?Colors.grey.shade900: GrayClr(),
         borderRadius: BorderRadius.circular(30)
       ),
       child: Stack(
@@ -133,15 +149,15 @@ class ProductInfo extends StatelessWidget{
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ///Products Images..
-                Image.asset(product_img,width: 85,),
+                Image(image: product_img,width: 85,),
                 ///Product Name..
-                Text("$product_name",textAlign: TextAlign.center,style: TextStyle(fontSize: 15),),
+                Text("$product_name",textAlign: TextAlign.center,style: TextStyle(fontSize: 15,color:isDark?WhiteClr(): BlackClr()),),
                 ///Price...
                 SizedBox(height: 8,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text("\$${product_price}.00",style: TextStyle(fontSize: 14),),
+                    Text("\$${product_price}.00",style: TextStyle(fontSize: 14,color:isDark?WhiteClr(): BlackClr(),)),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

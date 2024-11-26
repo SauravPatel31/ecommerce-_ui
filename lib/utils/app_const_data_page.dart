@@ -3,7 +3,10 @@
 import 'dart:ui';
 
 class AppConstData {
- static List<Map<String,dynamic>> categorydata=[
+
+  ///preferences key...
+  static final String PREF_UID="uid";
+  static List<Map<String,dynamic>> categorydata=[
     {
       'categoryimg':'assets/images/categoryimg/sho.jpeg',
       'categoryname':'Shoes'
