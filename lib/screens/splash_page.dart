@@ -1,7 +1,5 @@
 import 'dart:async';
-
 import 'package:ecommerce_app/screens/dashboard/bottom_nav_page.dart';
-import 'package:ecommerce_app/screens/dashboard/nav_pages/home/home_page.dart';
 import 'package:ecommerce_app/screens/login/login_page.dart';
 import 'package:ecommerce_app/utils/app_const_data_page.dart';
 import 'package:ecommerce_app/utils/styling_page.dart';
@@ -23,7 +21,7 @@ class SplashPageState extends State<SplashPage>{
 
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), ()async{
+    Timer(Duration(milliseconds: 3500), ()async{
       SharedPreferences pref =await SharedPreferences.getInstance();
       String uid = pref.getString(AppConstData.PREF_UID)??"";
       Widget navTo=LoginPage();
@@ -36,14 +34,10 @@ class SplashPageState extends State<SplashPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Lottie.asset("assets/lottie/shopping.json"),
-            Text("Shopping",style: mytext20(myFontweight: FontWeight.w900),)
-          ],
-        ),
+      body: SizedBox(
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height  ,
+        child: Image.asset("assets/images/online_shope.gif",fit: BoxFit.cover,),
       ),
     );
   }

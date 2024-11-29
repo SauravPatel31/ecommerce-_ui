@@ -1,8 +1,7 @@
-import 'package:ecommerce_app/screens/dashboard/bottom_nav_provider.dart';
-import 'package:ecommerce_app/screens/dashboard/nav_pages/home/home_page.dart';
+
 import 'package:ecommerce_app/screens/dashboard/nav_pages/place_orders/bloc/place_oder_bloc.dart';
 import 'package:ecommerce_app/screens/dashboard/nav_pages/place_orders/bloc/place_oder_state.dart';
-import 'package:ecommerce_app/screens/dashboard/nav_pages/product_details/product_details_page.dart';
+
 import 'package:ecommerce_app/utils/custom_widget_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -86,9 +85,9 @@ class PlaceOdersPage extends StatelessWidget{
        }
        if(state is PlaceOderLoadedState){
          return state.mData.orders!.isNotEmpty?ListView.builder(
-           itemCount: state.mData.orders![0].product!.length,
+           itemCount: state.mData.orders!.length,
            itemBuilder: (_, index) {
-             var eachDetails = state.mData.orders![index];
+             // var eachDetails = state.mData.orders![index].product;
              return Container(
                margin: EdgeInsets.all(10),
                height: 140,
@@ -113,7 +112,7 @@ class PlaceOdersPage extends StatelessWidget{
                                borderRadius: BorderRadius.circular(
                                    20),
                                image: DecorationImage(
-                                 image: NetworkImage(eachDetails.product![index].image!),
+                                 image: NetworkImage(state.mData.orders![index].product![0].image!),
                                  fit: BoxFit.contain,)
                            ),
                          ),
@@ -127,20 +126,20 @@ class PlaceOdersPage extends StatelessWidget{
                                crossAxisAlignment: CrossAxisAlignment.start,
                                children: [
                                  ///Product Name...
-                                 Text(eachDetails.product![index].name!,
+                                 Text("${state.mData.orders![index].product![0].name}",
                                    style: TextStyle(
                                        fontWeight: FontWeight.bold,
                                        fontFamily: "pop",
                                        color: isDark ? WhiteClr() : BlackClr()),),
                                  SizedBox(height: 5,),
-                                 Text("\$${eachDetails.product![index].price}/per",
+                                 Text("\$${state.mData.orders![index].product![0].price}/per",
                                    style: TextStyle(
                                        fontWeight: FontWeight.bold,
                                        fontFamily: "pop",
                                        color: isDark ? WhiteClr() : BlackClr()),),
                                  SizedBox(height:5 ,),
                                  Text("Total Amount",style: mytext11(mycolor: isDark?WhiteClr():BlackClr()),),
-                                 Text("\$${eachDetails.totalAmount}",
+                                 Text("\$${state.mData.orders![index].totalAmount}",
                                    style: TextStyle(
                                        fontWeight: FontWeight.bold,
                                        fontFamily: "pop",
@@ -185,7 +184,7 @@ class PlaceOdersPage extends StatelessWidget{
                                  "assets/icons/minus.png",
                                  width: 25,)),
                            ///Quantity Count Update..
-                           Text("${eachDetails.product![index].quantity}",
+                           Text("${state.mData.orders![index].product![0].quantity}",
                              style: mytext16(
                                  myFontweight: FontWeight.bold),),
                            ///Count++..

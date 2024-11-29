@@ -6,34 +6,32 @@ class AppConstData {
 
   ///preferences key...
   static final String PREF_UID="uid";
+
   static List<Map<String,dynamic>> categorydata=[
     {
-      'categoryimg':'assets/images/categoryimg/sho.jpeg',
-      'categoryname':'Shoes'
+      //assets/images/phoneImage
+      'categoryimg':'assets/images/phoneImage/oppo.png',
+      'categoryname':'Oppo'
     },
     {
-      'categoryimg':'assets/images/categoryimg/beauty.jpeg',
-      'categoryname':'Beauty'
+      'categoryimg':'assets/images/phoneImage/lenovo.png',
+      'categoryname':'Lenovo'
     },
     {
-      'categoryimg':'assets/images/categoryimg/womeans_fashion.jpeg',
-      'categoryname':"Women's Fashion"
+      'categoryimg':'assets/images/phoneImage/apple.png',
+      'categoryname':"Apple"
     },
     {
-      'categoryimg':'assets/images/categoryimg/jewelry.jpeg',
-      'categoryname':'jewelry'
+      'categoryimg':'assets/images/phoneImage/samsung.png',
+      'categoryname':'Samsung'
     },
     {
-      'categoryimg':'assets/images/categoryimg/menfashion.jpg',
-      'categoryname':"Men's Fashion"
+      'categoryimg':'assets/images/phoneImage/mi.png',
+      'categoryname':"Mi"
     },
     {
-      'categoryimg':'assets/images/categoryimg/watch.jpeg',
-      'categoryname':"Watch's"
-    },
-    {
-      'categoryimg':'assets/images/categoryimg/mobile.jpeg',
-      'categoryname':"Mobile's"
+      'categoryimg':'assets/images/phoneImage/vivo.png',
+      'categoryname':"Vivo"
     },
 
   ];

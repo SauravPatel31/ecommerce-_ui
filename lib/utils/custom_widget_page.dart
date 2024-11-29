@@ -24,6 +24,7 @@ class _MyTextFieldState extends State<MyTextField> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = Theme.of(context).brightness==Brightness.dark;
     print("uirebuild");
    return TextFormField(
      validator: widget.validator,
@@ -42,7 +43,7 @@ class _MyTextFieldState extends State<MyTextField> {
            child: widget.isVisible?Icon(Icons.visibility):Icon(Icons.visibility_off)):Icon(widget.mySuficsIcon),
        border: OutlineInputBorder(
          borderSide: BorderSide(
-           color: Colors.black,
+           color:isDark?WhiteClr(): Colors.black,
            width: 2
          ),
 
@@ -50,7 +51,7 @@ class _MyTextFieldState extends State<MyTextField> {
        ),
        focusedBorder: OutlineInputBorder(
            borderSide: BorderSide(
-               color: Colors.black,
+               color: isDark?WhiteClr(): Colors.black,
                width: 2
            ),
 
@@ -58,7 +59,7 @@ class _MyTextFieldState extends State<MyTextField> {
        ),
        enabledBorder: OutlineInputBorder(
            borderSide: BorderSide(
-               color: Colors.black,
+               color: isDark?WhiteClr(): Colors.black,
                width: 2
            ),
 

@@ -12,7 +12,6 @@ import 'package:ecommerce_app/screens/login/bloc/login_bloc.dart';
 import 'package:ecommerce_app/screens/signup/bloc/signup_bloc.dart';
 import 'package:ecommerce_app/screens/splash_page.dart';
 import 'package:ecommerce_app/theme_provider.dart';
-import 'package:ecommerce_app/utils/styling_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';

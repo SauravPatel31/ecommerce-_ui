@@ -59,19 +59,19 @@ class _HomePageState extends State<HomePage> {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              image: DecorationImage(image: AssetImage("assets/images/shoesimg/shoimg.jpeg"),fit: BoxFit.cover)
+              image: DecorationImage(image: AssetImage("assets/images/winterSale.jpg"),fit: BoxFit.cover)
           ),
         ),
 
         ///Discount Text..
-        Positioned(
+      /*  Positioned(
           top: 11,
           left: 15,
           child: Container(
             width: 170,
             child: Text("Super Sale Discount Up to 50%",style: mytext22(myFontweight: FontWeight.w900),),
           ),
-        ),
+        ),*/
         ///Shop Now Button...
         Positioned(
             bottom: 15,
@@ -86,19 +86,19 @@ class _HomePageState extends State<HomePage> {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              image: DecorationImage(image: AssetImage("assets/images/shoesimg/shoimg.jpeg"),fit: BoxFit.cover)
+              image: DecorationImage(image: AssetImage("assets/images/phonesale.jpg"),fit: BoxFit.cover)
           ),
         ),
 
         ///Discount Text..
-        Positioned(
+       /* Positioned(
           top: 11,
           left: 15,
           child: Container(
             width: 170,
             child: Text("Super Sale Discount Up to 50%",style: mytext22(myFontweight: FontWeight.w900),),
           ),
-        ),
+        ),*/
         ///Shop Now Button...
         Positioned(
             bottom: 15,
@@ -113,19 +113,18 @@ class _HomePageState extends State<HomePage> {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
-              image: DecorationImage(image: AssetImage("assets/images/shoesimg/shoimg.jpeg"),fit: BoxFit.cover)
+              image: DecorationImage(image: AssetImage("assets/images/supersale.jpg"),fit: BoxFit.cover)
           ),
         ),
-
         ///Discount Text..
-        Positioned(
+       /* Positioned(
           top: 11,
           left: 15,
           child: Container(
             width: 170,
             child: Text("Super Sale Discount Up to 50%",style: mytext22(myFontweight: FontWeight.w900),),
           ),
-        ),
+        ),*/
         ///Shop Now Button...
         Positioned(
             bottom: 15,
@@ -209,7 +208,6 @@ class _HomePageState extends State<HomePage> {
                     DotsIndicator(dotsCount: sliderItems.length,position: currentIndecatorPosition,
                       decorator: DotsDecorator(
                       activeColor:OrangeClr(),
-
                           size: const Size.square(9.0),
                         activeSize: const Size(18.0, 9.0),
                         activeShape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),)
@@ -253,7 +251,7 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             ///Category Image
                             CircleAvatar(
-                              backgroundColor: Colors.deepOrange,
+                              backgroundColor: Colors.grey,
                               backgroundImage: AssetImage(AppConstData.categorydata[index]["categoryimg"]),
                               maxRadius: 35,
                             ),

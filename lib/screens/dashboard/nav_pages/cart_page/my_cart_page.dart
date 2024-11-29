@@ -126,20 +126,33 @@ class MyCartState extends State<StatefulWidget> {
             );
           }
           if (state is CartErrorState) {
-            return Center(child: SizedBox(
-                width: 250,
-                height: 250,
-                child:Lottie.asset("assets/lottie/network_problem.json",fit: BoxFit.cover)));
+            if(state.errorMsg=="Cart data not found") {
+              return Center(
+                child: SizedBox(
+                    width: 200,
+                    height: 200,
+                    child:Lottie.asset("assets/lottie/car_empty.json",fit: BoxFit.cover)),
+              );
+            }else{
+              return SizedBox(
+                  width: 250,
+                  height: 250,
+                  child:Lottie.asset("assets/lottie/network_problem.json",fit: BoxFit.cover));
+            }
+
+
           }
           if (state is CartLoadedState) {
             getBillReady(state.mData.data!);
-            return state.mData.data!.isNotEmpty ? Column(
-              children: [
-                ///Product items list...
-                Expanded(
-                  child: SizedBox(
+            return state.mData.data!.isNotEmpty ? SingleChildScrollView(
+              child: Column(
+                children: [
+                  ///Product items list...
+                  SizedBox(
                     width: double.infinity,
                     child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
                       itemCount: state.mData.data!.length,
                       itemBuilder: (_, index) {
                         var eachDetails = state.mData.data![index];
@@ -166,14 +179,10 @@ class MyCartState extends State<StatefulWidget> {
                                       width: 95,
                                       height: 95,
                                       decoration: BoxDecoration(
-                                          color: isDark
-                                              ? Colors.grey.shade500
-                                              : GrayClr(),
-                                          borderRadius: BorderRadius.circular(
-                                              20),
+                                          color: isDark ? Colors.grey.shade500 : GrayClr(),
+                                          borderRadius: BorderRadius.circular(20),
                                           image: DecorationImage(
-                                            image: NetworkImage(
-                                                eachDetails.image!),
+                                            image: NetworkImage(eachDetails.image!),
                                             fit: BoxFit.contain,)
                                       ),
                                     ),
@@ -232,7 +241,7 @@ class MyCartState extends State<StatefulWidget> {
                                       setState(() {});
                                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.errorMsg)));
                                     }
-                                    
+
                                   },
                                   child: IconButton(onPressed: () {
                                     context.read<ProductRemoveBloc>().add(ProductRemoveE(cart_Id: state.mData.data![index].id!));
@@ -241,7 +250,7 @@ class MyCartState extends State<StatefulWidget> {
                                     });((){});
                                   },
                                       icon: Icon(Icons.delete, size: 28, color: Colors.red,)),
-                                  
+
                                 ),
                               ),
 
@@ -300,128 +309,127 @@ class MyCartState extends State<StatefulWidget> {
 
                     ),
                   ),
-                ),
-                SizedBox(height: 10,),
-                ///Total bill...
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      color: isDark ? Colors.grey.shade900 : Colors.white,
-                      borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(35))
-                  ),
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ///Discount Code..
-                          TextField(
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30)
+                  SizedBox(height: 10,),
+                  ///Total bill...
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        color: isDark ? Colors.grey.shade900 : Colors.white,
+                        borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(35))
+                    ),
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 20, vertical: 20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            ///Discount Code..
+                            TextField(
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(30)
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  borderSide: BorderSide(
+                                      color: isDark ? WhiteClr() : BlackClr(),
+                                      width: 2),
+                                ),
+                                suffix: Text("Apply", style: mytext16(
+                                    mycolor: OrangeClr(),
+                                    myFontweight: FontWeight.w700),),
+                                hintText: "Enter Discount Code",
                               ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                borderSide: BorderSide(
-                                    color: isDark ? WhiteClr() : BlackClr(),
-                                    width: 2),
-                              ),
-                              suffix: Text("Apply", style: mytext16(
-                                  mycolor: OrangeClr(),
-                                  myFontweight: FontWeight.w700),),
-                              hintText: "Enter Discount Code",
                             ),
-                          ),
-                          SizedBox(height: 10,),
-
-                          ///SubTotal..
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Discount:-${discountPer * 100}%",
-                                style: TextStyle(fontSize: 13,
+                            SizedBox(height: 10,),
+                            ///SubTotal..
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Discount:-${discountPer * 100}%",
+                                  style: TextStyle(fontSize: 13,
+                                      color: Colors.grey,
+                                      fontWeight: FontWeight.w600,
+                                      fontFamily: 'pop'),),
+                                Text("\$${discountAmt}", style: mytext16(
+                                    myFontweight: FontWeight.w900,
+                                    mycolor: isDark ? WhiteClr() : BlackClr()),)
+                              ],
+                            ),
+                            SizedBox(height: 10,),
+                            Divider(thickness: 2,),
+                            ///Total Amount...
+                            SizedBox(height: 10,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text("Total", style: TextStyle(fontSize: 13,
                                     color: Colors.grey,
                                     fontWeight: FontWeight.w600,
                                     fontFamily: 'pop'),),
-                              Text("\$${discountAmt}", style: mytext16(
-                                  myFontweight: FontWeight.w900,
-                                  mycolor: isDark ? WhiteClr() : BlackClr()),)
-                            ],
-                          ),
-                          SizedBox(height: 10,),
-                          Divider(thickness: 2,),
-                          ///Total Amount...
-                          SizedBox(height: 10,),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text("Total", style: TextStyle(fontSize: 13,
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: 'pop'),),
-                              Text("\$${finalAmt}", style: mytext16(
-                                  myFontweight: FontWeight.w900,
-                                  mycolor: isDark ? WhiteClr() : BlackClr()),)
-                            ],
-                          ),
-                          SizedBox(height: 20,),
-                          ///Checkout Button...
-                          BlocListener<CreateOrderBloc,CreateOrderState>(
-                            listener: (_,state){
-                              if(state is CreateOrderLoadingState){
-                                isLoading=true;
-                                setState(() {});
-                              }
-                              if(state is CreateOderSuccessState){
-                                isLoading=false;
-                                showDialog(context: context, builder: (_){
-                                  return Center(
-                                    child: Lottie.asset("assets/lottie/succsefuly.json",fit: BoxFit.cover),
-                                  );});
-                                setState(() {
-                                  Timer(Duration(seconds: 2),() {
-                                    context.read<BottomNavProvider>().UpdateIndex(2);
-                                    Navigator.pop(context);
-                                  },);
-                                });
-                              }
-                              if(state is CreateOrderFaliureState){
-                                isLoading=true;
-                                setState(() {});
-                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.errorMsg)));
-                              }
-                            },
-                            child: InkWell(
-                              onTap: (){
-                                context.read<CreateOrderBloc>().add(getOrderCreateEvent());
-                              },
-                              child: RoundedBtn(
-                                mainWidget: isLoading?Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SizedBox(
-                                        width: 30,
-                                        height: 30,
-                                        child: CircularProgressIndicator(color: WhiteClr(),)),
-                                    SizedBox(width: 10,),
-                                    Text("Loading...",style: mytext11(mycolor: Colors.white),)
-                                  ],
-                                ):null,
-                                btnname: "Checkout",
-                                textsize: 21.00,
-                                btnheight: 55.00,
-                                btnwidth: double.infinity,),
+                                Text("\$${finalAmt}", style: mytext16(
+                                    myFontweight: FontWeight.w900,
+                                    mycolor: isDark ? WhiteClr() : BlackClr()),)
+                              ],
                             ),
-                          )
-                        ],
+                            SizedBox(height: 20,),
+                            ///Checkout Button...
+                            BlocListener<CreateOrderBloc,CreateOrderState>(
+                              listener: (_,state){
+                                if(state is CreateOrderLoadingState){
+                                  isLoading=true;
+                                  setState(() {});
+                                }
+                                if(state is CreateOderSuccessState){
+                                  isLoading=false;
+                                  showDialog(context: context, builder: (_){
+                                    return Center(
+                                      child: Lottie.asset("assets/lottie/succsefuly.json",fit: BoxFit.cover),
+                                    );});
+                                  setState(() {
+                                    Timer(Duration(seconds: 2),() {
+                                      context.read<BottomNavProvider>().UpdateIndex(2);
+                                      Navigator.pop(context);
+                                    },);
+                                  });
+                                }
+                                if(state is CreateOrderFaliureState){
+                                  isLoading=true;
+                                  setState(() {});
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.errorMsg)));
+                                }
+                              },
+                              child: InkWell(
+                                onTap: (){
+                                  context.read<CreateOrderBloc>().add(getOrderCreateEvent());
+                                },
+                                child: RoundedBtn(
+                                  mainWidget: isLoading?Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(
+                                          width: 30,
+                                          height: 30,
+                                          child: CircularProgressIndicator(color: WhiteClr(),)),
+                                      SizedBox(width: 10,),
+                                      Text("Loading...",style: mytext11(mycolor: Colors.white),)
+                                    ],
+                                  ):null,
+                                  btnname: "Checkout",
+                                  textsize: 21.00,
+                                  btnheight: 55.00,
+                                  btnwidth: double.infinity,),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ) : Center(child: Text("Cart is Empty",style: mytext16(mycolor: Colors.white),),);
           }
           return Container();
@@ -444,3 +452,19 @@ class MyCartState extends State<StatefulWidget> {
 
 }
 
+
+Widget loadAnimation({int flag = 0, double mWidth = 250, double mHeight = 250}){
+  String animPath = "";
+  if(flag==0){
+    /// network error anim
+    animPath = "assets/lottie/network_problem.json";
+  } else if(flag == 1){
+    ///unauthroized
+    animPath = "assets/lottie/network_problem.json";
+  }
+
+  return SizedBox(
+      width: mWidth,
+      height: mHeight,
+      child:Lottie.asset(animPath,fit: BoxFit.cover));
+}
