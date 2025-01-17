@@ -3,6 +3,8 @@ Here's the updated README with your email included:
 ---
 
 # E-Commerce UI
+![e-comm](https://github.com/user-attachments/assets/a995b634-1f99-4049-83ef-40303c5ade4e)
+
 
 A modern and responsive e-commerce user interface built with **Flutter**, featuring **theme management** and state handling using **BLoC** and **Provider**. This project follows the **MVVM architecture** to ensure a clean, maintainable, and scalable codebase.
 
