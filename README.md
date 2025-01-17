@@ -65,8 +65,9 @@ The application will launch on a connected device or emulator.
 - View products, add them to the cart, and purchase them.
 - Manage your profile and view your orders.
 - Toggle between light and dark themes.
-
+- **Error Handling**: In case of a failed API request, the app will handle the exceptions and display appropriate error messages.
 ## Contributing
+
 
 Contributions are welcome! Follow these steps:
 
